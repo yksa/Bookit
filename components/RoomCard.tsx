@@ -1,20 +1,9 @@
+import { TRoom } from "@/models/room";
 import Image from "next/image";
 import Link from "next/link";
 
 type RoomCardProps = {
-  room: {
-    $id: string;
-    name: string;
-    description: string;
-    sqft: number;
-    capacity: number;
-    location: string;
-    address: string;
-    amenities: string;
-    availability: string;
-    price_per_hour: number;
-    image: string;
-  };
+  room: TRoom;
 };
 
 const RoomCard = ({ room }: RoomCardProps) => {
