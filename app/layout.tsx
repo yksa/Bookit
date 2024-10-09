@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} flex flex-col min-h-screen`}>
         <Header />
-        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 flex-grow">
           {children}
         </main>
         <Footer />
