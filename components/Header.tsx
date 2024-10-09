@@ -35,8 +35,11 @@ const Header = () => {
               </div>
             </div>
           </div>
+
+          {/* Right Side Menu */}
           <div className="ml-auto">
             <div className="ml-4 flex items-center md:ml-6">
+              {/* Logout only */}
               <Link
                 href="login.html"
                 className="mr-3 text-gray-800 hover:text-gray-600"
@@ -63,6 +66,7 @@ const Header = () => {
         </div>
       </nav>
 
+      {/* Mobile Menu */}
       <div className="md:hidden">
         <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
           <Link
@@ -71,6 +75,7 @@ const Header = () => {
           >
             Rooms
           </Link>
+          {/* Logged In Only */}
           <Link
             href="/bookings.html"
             className="block rounded-md px-3 py-2 text-base font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
