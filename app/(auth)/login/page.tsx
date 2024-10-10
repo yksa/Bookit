@@ -1,10 +1,39 @@
+"use client";
+
 import Link from "next/link";
+import { useFormState } from "react-dom";
+import createSession from "@/app/actions/createSession";
+import { useEffect } from "react";
+
+interface FormState {
+  email: string;
+  password: string;
+  error?: string;
+}
+
+const initialState: FormState = {
+  email: "",
+  password: "",
+};
 
 const LoginPage = () => {
+  const [state, formAction] = useFormState<FormState, FormData>(
+    createSession,
+    initialState
+  );
+
+  console.log({ state });
+
+  useEffect(() => {
+    if (state.error) {
+      alert(state.error);
+    }
+  }, [state]);
+
   return (
     <div className="flex items-center justify-center">
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-sm mt-20">
-        <form>
+        <form action={formAction}>
           <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
             Login
           </h2>
@@ -21,7 +50,7 @@ const LoginPage = () => {
               id="email"
               name="email"
               className="border rounded w-full py-3 px-4"
-              required
+              // required
             />
           </div>
 
