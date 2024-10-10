@@ -1,14 +1,17 @@
 "use client";
 
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 import Link from "next/link";
 import { useFormState } from "react-dom";
 import createSession from "@/app/actions/createSession";
-import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 interface FormState {
   email: string;
   password: string;
   error?: string;
+  success?: boolean;
 }
 
 const initialState: FormState = {
@@ -17,6 +20,7 @@ const initialState: FormState = {
 };
 
 const LoginPage = () => {
+  const router = useRouter();
   const [state, formAction] = useFormState<FormState, FormData>(
     createSession,
     initialState
@@ -26,7 +30,11 @@ const LoginPage = () => {
 
   useEffect(() => {
     if (state.error) {
-      alert(state.error);
+      toast.error(state.error);
+    }
+    if (state.success) {
+      toast.success("Logged in successfully");
+      router.push("/");
     }
   }, [state]);
 
@@ -50,7 +58,7 @@ const LoginPage = () => {
               id="email"
               name="email"
               className="border rounded w-full py-3 px-4"
-              // required
+              required
             />
           </div>
 
