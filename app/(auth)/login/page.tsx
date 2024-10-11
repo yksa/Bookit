@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { toast } from "react-toastify";
-import Link from "next/link";
-import { useFormState } from "react-dom";
 import createSession from "@/app/actions/createSession";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useFormState } from "react-dom";
+import { toast } from "react-toastify";
 
 interface FormState {
   email: string;
@@ -23,8 +24,9 @@ const LoginPage = () => {
   const router = useRouter();
   const [state, formAction] = useFormState<FormState, FormData>(
     createSession,
-    initialState
+    initialState,
   );
+  const { setIsAuthenticated } = useAuth();
 
   console.log({ state });
 
@@ -34,6 +36,7 @@ const LoginPage = () => {
     }
     if (state.success) {
       toast.success("Logged in successfully");
+      setIsAuthenticated(true);
       router.push("/");
     }
   }, [state]);
