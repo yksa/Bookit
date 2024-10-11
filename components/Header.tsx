@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { FaUser, FaSignInAlt, FaSignOutAlt, FaBuilding } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
+import { FaBuilding, FaSignInAlt, FaSignOutAlt, FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
 
-import logo from "@/assets/images/logo.svg";
-import destroySession from "@/app/actions/destroySession";
 import checkAuth from "@/app/actions/checkAuth";
+import destroySession from "@/app/actions/destroySession";
+import logo from "@/assets/images/logo.svg";
 
 const Header = () => {
   const router = useRouter();
