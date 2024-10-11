@@ -24,7 +24,7 @@ async function checkAuth() {
         email: user.email,
       },
     };
-  } catch (error) {
+  } catch {
     return {
       isAuthenticated: false,
     };
