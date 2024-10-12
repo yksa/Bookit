@@ -1,9 +1,9 @@
-import Image from "next/image";
-import { FaChevronCircleLeft } from "react-icons/fa";
-import Link from "next/link";
-import Heading from "@/components/Heading";
-import BookingForm from "@/components/BookingForm";
 import getSingleRoom from "@/app/actions/getSingleRoom";
+import BookingForm from "@/components/BookingForm";
+import Heading from "@/components/Heading";
+import Image from "next/image";
+import Link from "next/link";
+import { FaChevronCircleLeft } from "react-icons/fa";
 
 type RoomPageProps = {
   params: {
@@ -19,6 +19,14 @@ const RoomPage = async ({ params }: RoomPageProps) => {
     return <Heading title="Room Not Found" />;
   }
 
+  const bucketId = process.env
+    .NEXT_PUBLIC_APPWRITE_STORAGE_BUCKET_ROOMS as string;
+  const projectId = process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID as string;
+
+  const imageUrl = `https://cloud.appwrite.io/v1/storage/buckets/${bucketId}/files/${room.image}/view?project=${projectId}`;
+
+  const imageSrc = room.image ? imageUrl : "/images/no-image.jpg";
+
   return (
     <>
       <Heading title={room.name} />
@@ -33,7 +41,7 @@ const RoomPage = async ({ params }: RoomPageProps) => {
 
         <div className="flex flex-col sm:flex-row sm:space-x-6">
           <Image
-            src={`/images/${room.image}`}
+            src={imageSrc}
             alt={room.name}
             className="w-full sm:w-1/3 h-64 object-cover rounded-lg"
             width={400}
