@@ -75,7 +75,7 @@ const RoomPage = async ({ params }: RoomPageProps) => {
           </div>
         </div>
 
-        <BookingForm />
+        <BookingForm roomId={room.$id} />
       </div>
     </>
   );
