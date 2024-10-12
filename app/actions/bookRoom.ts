@@ -6,6 +6,7 @@ import { ID } from "node-appwrite";
 
 import { createSessionClient } from "@/config/appwrite";
 import { revalidatePath } from "next/cache";
+import checkRoomAvailability from "./checkRoomAvailability";
 
 async function bookRoom(
   previousState: Record<string, unknown>,
@@ -43,14 +44,26 @@ async function bookRoom(
     const checkInTime = formData.get("check_in_time");
     const checkOutDate = formData.get("check_out_date");
     const checkOutTime = formData.get("check_out_time");
+    const roomId = formData.get("room_id") as string;
 
     // Combine data and time to ISO 8601 format
     const checkIn = new Date(`${checkInDate}T${checkInTime}`).toISOString();
     const checkOut = new Date(`${checkOutDate}T${checkOutTime}`).toISOString();
 
+    // Check if the room is available
+    const { error, isAvailable } = await checkRoomAvailability(
+      roomId,
+      checkIn,
+      checkOut,
+    );
+
+    if (error || !isAvailable) {
+      return { error: error || "Room is not available for the selected dates" };
+    }
+
     const bookingData = {
       user_id: user.$id,
-      room_id: formData.get("room_id"),
+      room_id: roomId,
       check_in: checkIn,
       check_out: checkOut,
     };
