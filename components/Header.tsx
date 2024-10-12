@@ -12,7 +12,7 @@ import { useAuth } from "@/context/AuthContext";
 
 const Header = () => {
   const router = useRouter();
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, setIsAuthenticated, currentUser } = useAuth();
 
   const handleLogout = async () => {
     try {
@@ -60,6 +60,14 @@ const Header = () => {
                       className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
                     >
                       Add Room
+                    </Link>
+
+                    {/* Show Username with userIcon from fontAwesome  */}
+                    <Link
+                      href="/profile"
+                      className="rounded-md px-3 py-2 text-sm font-medium text-gray-800 hover:bg-gray-700 hover:text-white"
+                    >
+                      <FaUser className="inline mr-1" /> {currentUser?.name}
                     </Link>
                   </>
                 )}

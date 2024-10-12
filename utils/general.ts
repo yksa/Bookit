@@ -39,8 +39,6 @@ export const isDateRangeOverlapping = (
   checkOutB: DateTime,
 ) => {
   return (
-    (checkInA >= checkInB && checkInA < checkOutB) ||
-    (checkOutA > checkInB && checkOutA <= checkOutB) ||
-    (checkInA <= checkInB && checkOutA >= checkOutB)
+    checkInA < checkOutB && checkOutA > checkInB // Overlapping ranges
   );
 };
