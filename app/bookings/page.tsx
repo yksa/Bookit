@@ -1,4 +1,5 @@
 import BookedRoomCard from "@/components/BookedRoomCard";
+import Heading from "@/components/Heading";
 import getMyBookings from "../actions/getMyBookings";
 
 const BookingsPage = async () => {
@@ -11,6 +12,7 @@ const BookingsPage = async () => {
 
   return (
     <>
+      <Heading title="My Bookings" />
       {bookings.length > 0 ? (
         bookings.map((booking) => <BookedRoomCard booking={booking} />)
       ) : (

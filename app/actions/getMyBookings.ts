@@ -27,10 +27,9 @@ async function getMyBookings(): Promise<TBooking[] | { error?: string }> {
 
   try {
     const databaseId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE;
-    const roomCollectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ROOMS;
     const bookingCollectionId = process.env
       .NEXT_PUBLIC_APPWRITE_COLLECTION_BOOKINGS as string;
-    if (!databaseId || !roomCollectionId) {
+    if (!databaseId) {
       throw new Error("Missing required environment variables for Appwrite");
     }
 
