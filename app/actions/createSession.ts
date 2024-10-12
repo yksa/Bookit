@@ -11,8 +11,8 @@ interface FormState {
 }
 
 async function createSession(
-  previousState: any,
-  formData: FormData
+  previousState: FormState,
+  formData: FormData,
 ): Promise<FormState> {
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
